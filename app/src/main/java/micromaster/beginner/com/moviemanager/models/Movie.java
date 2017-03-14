@@ -1,10 +1,12 @@
 package micromaster.beginner.com.moviemanager.models;
 
+import java.io.Serializable;
+
 /**
  * Created by praxis on 13/03/17.
  */
 
-public class Movie {
+public class Movie implements Serializable {
     String id;
     String title;
     String overview;
@@ -72,7 +74,7 @@ public class Movie {
     }
 
     public String getBackdropPath() {
-        return backdropPath;
+        return String.format("https://image.tmdb.org/t/p/w780%s", backdropPath);
     }
 
     public void setBackdropPath(String backdropPath) {

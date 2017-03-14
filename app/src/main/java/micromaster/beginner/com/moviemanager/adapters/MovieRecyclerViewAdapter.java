@@ -2,6 +2,7 @@ package micromaster.beginner.com.moviemanager.adapters;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.widget.CardView;
@@ -20,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import micromaster.beginner.com.moviemanager.R;
+import micromaster.beginner.com.moviemanager.activities.MovieDetailActivity;
 import micromaster.beginner.com.moviemanager.models.Movie;
 
 /**
@@ -63,7 +65,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         return movies.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.ivMovieImage)
         ImageView ivMovieImage;
         @BindView(R.id.tvTitle)
@@ -76,6 +78,16 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Movie movie = movies.get(getAdapterPosition());
+
+            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+            intent.putExtra("MOVIE", movie);
+            getContext().startActivity(intent);
         }
     }
 }
